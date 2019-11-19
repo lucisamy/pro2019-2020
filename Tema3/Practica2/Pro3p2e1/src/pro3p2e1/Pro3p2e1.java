@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author Lucía
  */
 public class Pro3p2e1 {
-
+    //ESTA VERSION NO TIENE VALIDACIONES CON EXCEPCIONES.
     /**
      * @param args the command line arguments
      */
@@ -53,10 +53,12 @@ public class Pro3p2e1 {
                     error=false;
                 }
                 else
+                {
                     error=true;
                     JOptionPane.showMessageDialog(null, "El nivel de estudios solo puede ser: P,M o S");
                 }
-            while(error=true);
+            }
+            while(error==true);
             switch(estadoCivil){
                 case 'S': 
                     sueldo = sueldo + PLUS;
@@ -78,9 +80,9 @@ public class Pro3p2e1 {
                     error= true;
             }
         }
-        while(error=true);
+        while(error==true);
         //Mostrar resultado
-        JOptionPane.showMessageDialog(null, "el sueldo del empleado es " + sueldo);
+        JOptionPane.showMessageDialog(null, "el sueldo del empleado es " + sueldo + " euros");
     }
     public static int sueldoSegunHoras(int nroHoras){
         int sueldo;

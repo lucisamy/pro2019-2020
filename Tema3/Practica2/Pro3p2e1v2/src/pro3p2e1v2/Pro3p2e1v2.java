@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author Lucía
  */
 public class Pro3p2e1v2 {
-
+    //VERSION CON EXCEPCIONES
     /**
      * @param args the command line arguments
      */
@@ -31,89 +31,106 @@ public class Pro3p2e1v2 {
     
     public static void main(String[] args) {
         int nroHoras=0;
-        boolean error;
-        do{
-            //pedimos horas trabajadas y validamos.
-            try{
-                nroHoras = Integer.parseInt(JOptionPane.showInputDialog("Teclea número de horas trabajadas del empleado"));
-                if(nroHoras<1)
-                    throw new HorasIncorrectasException();
-                    //NINGUNA LINEA DENTRO DEL IF DESPUES DE ESTA SERÁ EJECUTADA
-                else
-                    error=false;
-            }
-            catch(HorasIncorrectasException e){
-                //Mensaje de error
-                JOptionPane.showMessageDialog(null, "Horas trabajadas no puede ser inferior a 1");
-                 error=true;
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, "problemas /n" + e.getClass());
-                error=true;
-            }
-        }
-        while(error==true);
-        int sueldo = sueldoSegunHoras(nroHoras);
-        //pedimos estado civil y nivel de estudios
         char estadoCivil = 0;
         char nivelEstudios = 0;
+        int sueldo=0;
+        boolean error;
         try{
-            //error=true; //cambio valor de error a true para obligarle a entrar en la primera repetitiva do-while
             do{
-                estadoCivil = JOptionPane.showInputDialog("escriba estado civil: S para soltero, C para casado, V para viudo y D para divorciado").toUpperCase().charAt(0);
-                //validación
-                if(estadoCivil =='S'||estadoCivil=='C'||estadoCivil=='V'||estadoCivil=='D'){
-                    error=false;
+                //pedimos horas trabajadas y validamos.
+                try{
+                    nroHoras = Integer.parseInt(JOptionPane.showInputDialog("Teclea número de horas trabajadas del empleado"));
+                    if(nroHoras<1)
+                        throw new HorasIncorrectasException();
+                        //NINGUNA LINEA DENTRO DEL IF DESPUES DE ESTA SERÁ EJECUTADA
+                    else
+                        error=false;
                 }
-                else
-                    throw new EstadoCivilException();
-            }
-            while(error==true);
-            //error=true; //-->vuelvo a cambiar valor de error para obligar a entrar en la repetitiva
-            do{
-                nivelEstudios = JOptionPane.showInputDialog("Escriba nivel de estudios: P de primario, M de medo y S de superior").toUpperCase().charAt(0);
-                //validar nivelEstudios
-                if(nivelEstudios=='P'||nivelEstudios=='M'||nivelEstudios=='S'){
-                    error=false;
+                catch(HorasIncorrectasException e){
+                    //Mensaje de error
+                    JOptionPane.showMessageDialog(null, "Horas trabajadas no puede ser inferior a 1");
+                     error=true;
                 }
-                else{ 
+                catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Debes escribir un número");
                     error=true;
-                    throw new NivelEstudiosException();
+                }
+
+            }
+            while(error==true);
+            sueldo = sueldoSegunHoras(nroHoras);
+            //pedimos estado civil y nivel de estudios
+            do{
+                try{
+                    estadoCivil = JOptionPane.showInputDialog("escriba estado civil: S para soltero, C para casado, V para viudo y D para divorciado").toUpperCase().charAt(0);
+                    //validación
+                    if(estadoCivil =='S'||estadoCivil=='C'||estadoCivil=='V'||estadoCivil=='D'){
+                        error=false;
+                    }
+                    else
+                        throw new EstadoCivilException();
+                }
+                catch(IndexOutOfBoundsException e){
+                    JOptionPane.showMessageDialog(null, "No dejar el campo Vacio");
+                    error=true;
+                }
+                catch(NullPointerException e){
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada");
+                    System.exit(0);
+                }
+                catch(EstadoCivilException e){
+                    JOptionPane.showMessageDialog(null, "Error, el estado civil solo puede ser: S,C,V o D");
+                    error= true;
                 }
             }
             while(error==true);
-        }
-        catch(EstadoCivilException e){
-            JOptionPane.showMessageDialog(null, "Error, el estado civil solo puede ser: S,C,V o D");
-            error= true;
-        }
-        catch(NivelEstudiosException e){
-            JOptionPane.showMessageDialog(null, "El nivel de estudios solo puede ser: P,M o S");
-            
+            do{
+                try{
+                    nivelEstudios = JOptionPane.showInputDialog("Escriba nivel de estudios: P de primario, M de medo y S de superior").toUpperCase().charAt(0);
+                    //validar nivelEstudios
+                    if(nivelEstudios=='P'||nivelEstudios=='M'||nivelEstudios=='S'){
+                        error=false;
+                    }
+                    else{ 
+                        error=true;
+                        throw new NivelEstudiosException();
+                    }
+                }
+                catch(IndexOutOfBoundsException e){
+                    JOptionPane.showMessageDialog(null, "No dejar el campo Vacio");
+                    error=true;
+                }
+                catch(NullPointerException e){
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada");
+                    System.exit(0);
+                }
+                catch(NivelEstudiosException e){
+                    JOptionPane.showMessageDialog(null, "El nivel de estudios solo puede ser: P,M o S");
+                    error=true;
+                }
+            }
+            while(error==true);
         }
         catch(Exception e){
-                JOptionPane.showMessageDialog(null, "problemas /n" + e.getClass());
-                error=true;
+            JOptionPane.showMessageDialog(null, "problemas \n" + e.getClass());
+            System.exit(0);
         }
         switch(estadoCivil){
             case 'S': 
-                sueldo = sueldo + PLUS;
-                error=false;       
+                sueldo = sueldo + PLUS;      
                 break;
             case 'C':
             case 'D':
                 if(nivelEstudios == 'S')
                     sueldo += PLUS;
-                error=false;
                 break;
             case 'V':
                 if(nivelEstudios=='P'||nivelEstudios=='S')
                     sueldo += PLUS;
-                error=false;
                 break;
         }
         //Mostrar resultado
-        JOptionPane.showMessageDialog(null, "el sueldo del empleado es " + sueldo);
+        JOptionPane.showMessageDialog(null, "el sueldo del empleado es " + sueldo + " euros");
     }
     public static int sueldoSegunHoras(int nroHoras){
         int sueldo;
