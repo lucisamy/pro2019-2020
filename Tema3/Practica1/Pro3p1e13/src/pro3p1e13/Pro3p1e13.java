@@ -33,10 +33,11 @@ public class Pro3p1e13 {
             do
             {
                 sexo = JOptionPane.showInputDialog("Teclea sexo del estudiante. Escribe F para femenino y M para masculino").charAt(0);
-                if(sexo.equals('F')==false ||sexo.equals('M')==false)
+
+                if(sexo.equals('F')==false &&sexo.equals('M')==false)
                     JOptionPane.showMessageDialog(null, "el dato de entrada no es válido");
             }
-            while(sexo.equals('F')==false||sexo.equals('M')==false);
+            while(sexo.equals('F')==false&&sexo.equals('M')==false);
             float estatura = Float.parseFloat(JOptionPane.showInputDialog("Teclea estatura del estudiante"));
             JOptionPane.showMessageDialog(null,  "los datos del estudiante son: \n" + "peso: " + peso + "Kg, edad: " + edad + " años, nombre: " + nombre + ", sexo: " + sexo + ", estatura:" + estatura + " m");
             //verificar si es apto
@@ -52,7 +53,7 @@ public class Pro3p1e13 {
                 }
             contador++;
         }
-        while(contador!=30);
+        while(contador!=3);
         JOptionPane.showMessageDialog(null, "El número de niñas aptas para el baloncesto es de " + cniñas + "  y el número de niños aptos es de " + cniños);
         
     }
