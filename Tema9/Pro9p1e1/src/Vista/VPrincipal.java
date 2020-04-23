@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pro9p1e1.Pro9p1e1;
 
@@ -106,21 +108,43 @@ public class VPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfOpcionActionPerformed
-        //validarOpc(); 
-        switch (tfOpcion.getText()){
-            case "1":
-                Pro9p1e1.registrarPersona();
-                break;
-            case "2":
-                Pro9p1e1.consultarPersona(solicitarNombre());
-                break;
-            case "3":
-                Pro9p1e1.consultarTodos();
-            default:
-                Pro9p1e1.salir();
-                
+        try {
+            String opc = tfOpcion.getText();
+            if(validarOpc(opc)){
+                switch (Integer.parseInt(opc)){
+                    case 1:
+                        Pro9p1e1.registrarPersona();
+                        break;
+                    case 2:
+                        Pro9p1e1.consultarPersona(solicitarNombre());
+                        break;
+                    case 3:
+                        Pro9p1e1.consultarTodos();
+                    case 4:
+                        Pro9p1e1.salir();
+                }
+            }
+            else
+                throw new Exception("opción inválida");
+            //en cualquier caso luego vaciamos la caja de texto
+            tfOpcion.setText("");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            tfOpcion.setText("");
         }
     }//GEN-LAST:event_tfOpcionActionPerformed
+    public boolean validarOpc(String opc)throws Exception{
+        //que no esté vacío
+        if(opc.isEmpty())
+            return false;
+        //que sea solo un caracter
+        if(opc.length()!=1)
+            return false;
+        //que sea un número comprendido entre 1 y 4
+        if(Integer.parseInt(opc)<0|Integer.parseInt(opc)>4)
+            return false;
+        return true;
+    }
     public String solicitarNombre(){
         //validarNombre();
         return JOptionPane.showInputDialog("Escribe el nombre de la persona");
