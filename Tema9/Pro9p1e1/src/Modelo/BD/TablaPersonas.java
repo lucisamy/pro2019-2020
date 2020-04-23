@@ -46,7 +46,7 @@ public class TablaPersonas {
     }
     public Persona seleccionarPersona(String nombre){
         try{
-            String plantilla = "SELECT * FROM PERSONAS WHERE NOMBRE = ?";
+            String plantilla = "SELECT * FROM PERSONAS WHERE NOMBRE = ?;";
             PreparedStatement ps = con.prepareStatement(plantilla);
             ps.setString(1, nombre);
             //ejecutamos consulta sql
@@ -75,7 +75,7 @@ public class TablaPersonas {
         try {
             ArrayList<Persona>listaPersonas = new ArrayList();
             //Preparamos sentencia sql con plantilla
-            String plantilla = "SELECT * FROM PERSONAS";
+            String plantilla = "SELECT * FROM PERSONAS;";
             //enlazamos sentencia con objeto conexión.
             //se podría usar Statement pero es más seguro con preparedStatement
             PreparedStatement ps = con.prepareStatement(plantilla);
