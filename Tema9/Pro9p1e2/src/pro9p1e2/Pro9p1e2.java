@@ -12,7 +12,10 @@ de ellas
  */
 package pro9p1e2;
 import Modelo.BD.*;
+import Modelo.UML.Evento;
 import Vista.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 /**
  *
  * @author Lucía
@@ -38,11 +41,39 @@ public class Pro9p1e2 {
         vp = new VPrincipal();
         vp.setVisible(true);
     }
-    public static void mostrarVE(){
-        ve = new VEventos();
+    public static void mostrarVE(int n){
+        ve = new VEventos(n);
         ve.setVisible(true);
     }
-    public static void insertarBd(Srting nombre,){
+    public static boolean insertarBd(String nombre,String lugar,LocalDate fecha,LocalTime horaInicio,LocalTime horaFin,int aforo){
+        //resto de validaciones: comprobar que no existe ya un evento con el mismo nombre haciendo una consulta a la BD
+        Evento e = te.seleccionar(nombre);
+        if (e!=null)
+            return false; //le decimos a la ventana que ha habido un error y que no ha podido crearse el evento.
+        else
+            //crear y llenar objeto
+            e = new Evento(nombre,lugar,fecha,horaInicio,horaFin,aforo);
+            //hacemos el insert
+            te.insertar(e);
+            return true; //notificamos a la ventana que se ha insertado correctamente el evento.
+    }
+    public static java.sql.Date convertirFechaSQL(LocalDate fechaLocalDate){
         
+        return null;
+    }
+    public static java.sql.Time convertirHoraSQL(LocalTime horaLocalTime){
+        
+        return null;
+    }
+    public static boolean buscarEvento(String nombre){
+        //este método hace una búsqueda en la base de datos y devuelve true si el evento existe y false si no.
+        Evento e = te.seleccionar(nombre);
+        if (e!=null)
+             return true; //el evento existe
+        else
+            return false; //el evento no existe
+    }
+    public static void eliminarEvento(String nombre){
+        te.eliminar(nombre);
     }
 }

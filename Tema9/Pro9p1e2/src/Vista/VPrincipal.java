@@ -36,6 +36,9 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        miAlta = new javax.swing.JMenuItem();
+        miBaja = new javax.swing.JMenuItem();
+        miModif = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,12 +60,22 @@ public class VPrincipal extends javax.swing.JFrame {
         bEditarEvento.setFocusable(false);
         bEditarEvento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bEditarEvento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bEditarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditarEventoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(bEditarEvento);
 
         bEliminarEvento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/cancelar.png"))); // NOI18N
         bEliminarEvento.setFocusable(false);
         bEliminarEvento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bEliminarEvento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bEliminarEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarEventoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(bEliminarEvento);
 
         jLabel1.setFont(new java.awt.Font("Broadway", 1, 18)); // NOI18N
@@ -71,6 +84,31 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Empresa");
 
         jMenu1.setText("Acontecimientos");
+
+        miAlta.setText("Alta");
+        miAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAltaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miAlta);
+
+        miBaja.setText("Baja");
+        miBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miBajaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miBaja);
+
+        miModif.setText("Modificación");
+        miModif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miModifActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miModif);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Salir");
@@ -101,8 +139,28 @@ public class VPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarEventoActionPerformed
-        Pro9p1e2.mostrarVE();
+        Pro9p1e2.mostrarVE(1);
     }//GEN-LAST:event_bGuardarEventoActionPerformed
+
+    private void miAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAltaActionPerformed
+        bGuardarEvento.doClick();
+    }//GEN-LAST:event_miAltaActionPerformed
+
+    private void miBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miBajaActionPerformed
+        bEliminarEvento.doClick();
+    }//GEN-LAST:event_miBajaActionPerformed
+
+    private void miModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miModifActionPerformed
+        bEditarEvento.doClick();
+    }//GEN-LAST:event_miModifActionPerformed
+
+    private void bEliminarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarEventoActionPerformed
+        Pro9p1e2.mostrarVE(2);
+    }//GEN-LAST:event_bEliminarEventoActionPerformed
+
+    private void bEditarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarEventoActionPerformed
+        Pro9p1e2.mostrarVE(3);
+    }//GEN-LAST:event_bEditarEventoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,6 +207,9 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JMenuItem miAlta;
+    private javax.swing.JMenuItem miBaja;
+    private javax.swing.JMenuItem miModif;
     // End of variables declaration//GEN-END:variables
 
 }

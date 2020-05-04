@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import javax.swing.JOptionPane;
 import pro9p1e2.Pro9p1e2;
 
 /**
@@ -13,12 +16,18 @@ import pro9p1e2.Pro9p1e2;
  */
 public class VEventos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VEventos
-     */
-    public VEventos() {
+    int opc;
+    LocalDate fechaLocalDate;
+    LocalTime horaInicio;
+    LocalTime horaFin;
+    public VEventos(int n) {
         initComponents();
         setLocationRelativeTo(null);
+        this.opc=n; //guardo en una variable global si se trata de un alta,baja o modificación.
+        //dependiendo de la opción elegida hay contenido que quiero mostrar/habilitar:
+        if(opc!=1){
+            jpCampos.setVisible(false);
+        }
     }
 
     /**
@@ -33,19 +42,20 @@ public class VEventos extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        tfNombre = new javax.swing.JTextField();
+        jpCampos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        bAceptar = new javax.swing.JButton();
-        bSalir = new javax.swing.JButton();
-        tfNombre = new javax.swing.JTextField();
         tfAforo = new javax.swing.JTextField();
         tfHoraInicio = new javax.swing.JFormattedTextField();
         cbLugares = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         tfFecha = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
         tfHoraFin = new javax.swing.JFormattedTextField();
+        bAceptar = new javax.swing.JButton();
+        bSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,15 +66,76 @@ public class VEventos extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre");
 
-        jLabel3.setText("Lugar");
-
-        jLabel4.setText("Fecha");
-
         jLabel5.setText("Hora Inicio");
 
         jLabel6.setText("Hora Fin");
 
         jLabel7.setText("Aforo");
+
+        tfHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+
+        cbLugares.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Artium", "Buesa Arena", "Iradier Arena", "Mendizorroza", "Teatro principal" }));
+
+        jLabel3.setText("Lugar");
+
+        tfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/MM/yyyy"))));
+
+        jLabel4.setText("Fecha");
+
+        tfHoraFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+
+        javax.swing.GroupLayout jpCamposLayout = new javax.swing.GroupLayout(jpCampos);
+        jpCampos.setLayout(jpCamposLayout);
+        jpCamposLayout.setHorizontalGroup(
+            jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpCamposLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpCamposLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
+                    .addGroup(jpCamposLayout.createSequentialGroup()
+                        .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfHoraInicio)
+                            .addComponent(tfAforo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfHoraFin)))
+                .addGap(29, 29, 29))
+        );
+        jpCamposLayout.setVerticalGroup(
+            jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCamposLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbLugares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(tfHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tfAforo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         bAceptar.setText("Aceptar");
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,134 +146,142 @@ public class VEventos extends javax.swing.JFrame {
 
         bSalir.setText("Salir");
 
-        tfHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-
-        cbLugares.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Artium", "Buesa Arena", "Iradier Arena", "Mendizorroza", "Teatro principal" }));
-
-        tfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("d/MM/yyyy"))));
-
-        tfHoraFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(bAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(bSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(72, 72, 72))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfHoraInicio)
-                            .addComponent(tfAforo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfHoraFin))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel2)
+                        .addGap(27, 27, 27)
+                        .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfNombre)
-                                .addComponent(cbLugares, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(49, 49, 49))
+                        .addGap(43, 43, 43)
+                        .addComponent(jpCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(bAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbLugares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jpCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfAforo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bAceptar)
                     .addComponent(bSalir))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        Pro9p1e2.insertarBd(tfNombre.getText(),cbLugares.getSelectedItem(),
-                            tfFecha.getText(),tfHoraInicio.getText(),
-                            tfHoraFin.getText(),tfAforo.getText());
+        try{
+            //sea cual sea el caso debo validar el campo nombre
+            validarNombre();//revisar que el string no esté vacío, que tenga pinta de nombre, expresion regular..
+            //pregunto qué opc es: alta, baja o modif: 
+            //o podría preguntar por el panel, si está o no visible y luego preguntar por baja/modificación
+            switch(opc){
+                case 1: alta();
+                        break;
+                case 2: baja();
+                        break;
+                case 3: modificacion();
+                        break;
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Nombre inválido");
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
-
+    public void alta(){
+        validarDatos();
+        //solo si no ha habido excepciones se pasan los datos al controlador.
+        if(Pro9p1e2.insertarBd(tfNombre.getText(),(String)cbLugares.getSelectedItem(),//transformamos el texto de la combobox de Object a String
+                            fechaLocalDate,horaInicio,horaFin,Integer.parseInt(tfAforo.getText())))
+            JOptionPane.showMessageDialog(null, "Evento insertado correctamente en la BD");
+        else
+            JOptionPane.showMessageDialog(null, "Problema insertando en la BD");
+    }
+    public void baja(){
+        //validado ya el nombre, debemos preguntar al controlador si ese evento existe
+        if(Pro9p1e2.buscarEvento(tfNombre.getText())){
+            //se podría mostrar el panel con la informacion del evento pero con los campos en disabled..
+            //pedimos confirmación:
+            if((JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el evento?"))==0)
+            {   
+                Pro9p1e2.eliminarEvento(tfNombre.getText());
+                JOptionPane.showMessageDialog(null, "Evento eliminado");
+            }
+            //si nos dicen que no o cancelar o después de la baja: vaciamos caja de texto nombre
+            tfNombre.setText("");
+        }
+        else
+            JOptionPane.showMessageDialog(null, "El evento no existe");
+            //colocar cursor en caja de texto nombre.
+    }
+    public void modificacion(){
+        
+    }
+    public void validarDatos(){
+        /*
+        validar datos: en cualquier caso validar nombre,
+        en caso de alta y modificacion validar el resto de campos.
+        */
+        try{
+            //validarNombre(); validaciones mas específicas?
+            if(opc!=2){ //quizás no hace falta
+                validarLugar();//Revisar que no esté vacío, es decir que algo esté seleccionado de la combobox
+                validarFecha();//en este método se convierte a formato localdate y se comprueba que la fecha sea posterior al dia de hoy.
+                validarHoras();//en este método se convierten las horas a formato Localtime y se comprueba que la hora final sea posterior a la de inicio.
+                validarAforo();//se comprueba que el aforo sea formato numérico y superior a 0, que no esté vacío.. etc. expresión regular.
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage()+ " inválido");
+        }
+    }
+    public void validarNombre()throws Exception{
+        
+        throw new Exception("Nombre");
+    }
+    public void validarLugar()throws Exception{
+       
+        throw new Exception("Lugar");
+    }
+    public void validarFecha()throws Exception{
+        //Conversión a Localdate
+         //la fecha en el formato adecuado se guarda en variable global fechaLocalDate
+         throw new Exception("Fecha");
+    }
+    public void validarHoras()throws Exception{
+        //Las horas se guardan en variables globales de tipo LocalTime
+        throw new Exception("Hora");
+    }
+    public void validarAforo()throws Exception{
+        throw new Exception("Aforo");
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VEventos().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAceptar;
@@ -216,6 +295,7 @@ public class VEventos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JPanel jpCampos;
     private javax.swing.JTextField tfAforo;
     private javax.swing.JFormattedTextField tfFecha;
     private javax.swing.JFormattedTextField tfHoraFin;
