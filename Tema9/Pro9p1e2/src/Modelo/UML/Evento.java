@@ -9,6 +9,7 @@ package Modelo.UML;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +23,8 @@ public class Evento {
     LocalTime horaFin;
     int aforo;
 
+    //de la relación con Persona
+    ArrayList<Persona>listaAsistentes;
     public Evento() {
     }
 
@@ -32,6 +35,7 @@ public class Evento {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.aforo = aforo;
+        this.listaAsistentes = new ArrayList();
     }
 
     public String getNombre() {
@@ -81,6 +85,17 @@ public class Evento {
     public void setAforo(int aforo) {
         this.aforo = aforo;
     }
+
+    public ArrayList<Persona> getListaAsistentes() {
+        return listaAsistentes;
+    }
+
+    public void setListaAsistentes(ArrayList<Persona> listaAsistentes) {
+        this.listaAsistentes = listaAsistentes;
+    }
     
+    public void setAsistente(Persona p){
+        listaAsistentes.add(p);
+    }
     
 }

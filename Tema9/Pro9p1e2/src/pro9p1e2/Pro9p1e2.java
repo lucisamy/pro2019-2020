@@ -31,6 +31,8 @@ public class Pro9p1e2 {
     //VISTA
     static VPrincipal  vp;
     static VEventos ve;
+    static VInscripcion vi;
+    
     public static void main(String[] args) {
         //abrir la conexión con la base de datos
         bd = new BDCon();
@@ -44,6 +46,7 @@ public class Pro9p1e2 {
     public static void mostrarVE(int n){
         ve = new VEventos(n);
         ve.setVisible(true);
+        vp.setVisible(false);
     }
     public static boolean insertarBd(String nombre,String lugar,LocalDate fecha,LocalTime horaInicio,LocalTime horaFin,int aforo){
         //resto de validaciones: comprobar que no existe ya un evento con el mismo nombre haciendo una consulta a la BD
@@ -75,5 +78,13 @@ public class Pro9p1e2 {
     }
     public static void eliminarEvento(String nombre){
         te.eliminar(nombre);
+    }
+    public static void mostrarVI(){
+        vi = new VInscripcion();
+        vi.setVisible(true);
+        //hay que ocultar la ventana principal
+        vp.setVisible(false);
+        //Rellenar la combobox de los eventos disponibles
+        
     }
 }

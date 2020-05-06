@@ -33,6 +33,7 @@ public class VPrincipal extends javax.swing.JFrame {
         bGuardarEvento = new javax.swing.JButton();
         bEditarEvento = new javax.swing.JButton();
         bEliminarEvento = new javax.swing.JButton();
+        bAsistente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -77,6 +78,17 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(bEliminarEvento);
+
+        bAsistente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/usuario.png"))); // NOI18N
+        bAsistente.setFocusable(false);
+        bAsistente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bAsistente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bAsistente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAsistenteActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bAsistente);
 
         jLabel1.setFont(new java.awt.Font("Broadway", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
@@ -124,7 +136,7 @@ public class VPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,6 +173,10 @@ public class VPrincipal extends javax.swing.JFrame {
     private void bEditarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarEventoActionPerformed
         Pro9p1e2.mostrarVE(3);
     }//GEN-LAST:event_bEditarEventoActionPerformed
+
+    private void bAsistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsistenteActionPerformed
+        Pro9p1e2.mostrarVI();
+    }//GEN-LAST:event_bAsistenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,6 +215,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAsistente;
     private javax.swing.JButton bEditarEvento;
     private javax.swing.JButton bEliminarEvento;
     private javax.swing.JButton bGuardarEvento;

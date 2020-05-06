@@ -7,6 +7,7 @@ package Modelo.BD;
 
 import Modelo.UML.Evento;
 import java.sql.*;
+import java.util.ArrayList;
 import pro9p1e2.Pro9p1e2;
 
 /**
@@ -15,6 +16,7 @@ import pro9p1e2.Pro9p1e2;
  */
 public class TEventos {
     
+    Evento e;
     Connection con;
     
     //Constructor de tabla con conexión
@@ -31,7 +33,7 @@ public class TEventos {
             //asignamos valores a los parámetros
             ps.setString(1,ev.getNombre().toUpperCase());
             ps.setString(2, ev.getLugar());
-            ps.setDate(3, Pro9p1e2.convertirFechaSQL(ev.getFecha()));//transformar de localdate a sql date o usar date en la clase "Evento"??
+            ps.setDate(3, Pro9p1e2.convertirFechaSQL(ev.getFecha()));//transformar de localdate a sql date
             ps.setTime(4, Pro9p1e2.convertirHoraSQL(ev.getHoraInicio()));//transformar de Localtime a sql time
             ps.setTime(5, Pro9p1e2.convertirHoraSQL(ev.getHoraFin()));
             ps.setInt(6, ev.getAforo());
@@ -58,18 +60,20 @@ public class TEventos {
             //preguntamos si ha encontrado ese evento
             if(resultado.next()){
                 //creamos objeto evento con los datos obtenidos
-                Evento e = new Evento(nombre,resultado.getString("lugar"),
-                                      resultado.getDate("fecha"),
-                                      resultado.getTime("horaInicio"),
-                                      resultado.getTime("horaFin"),
+                 e = new Evento(nombre,resultado.getString("lugar"),
+                                      resultado.getDate("fecha").toLocalDate(),
+                                      resultado.getTime("horaInicio").toLocalTime(),
+                                      resultado.getTime("horaFin").toLocalTime(),
                                       resultado.getInt("aforo"));
-                return e;
+                
             }
             else
                 throw new Exception("No se encontró el evento");
+            return e;
         }
         catch(Exception e){
             System.out.println("Problemas con la select " + e.getMessage());
+            return null;
         }
     }
     public void eliminar(String nombre){
@@ -93,5 +97,11 @@ public class TEventos {
     }
     public void modificar(){
         
+    }
+    public ArrayList<Evento> seleccionarEventosDisponibles(int aforo){
+        ArrayList<Evento>listaEventos = new ArrayList();
+        String plantilla = "SELECT * FROM EVENTOS WHERE AFORO>0;";
+        
+        return listaEventos;
     }
 }
